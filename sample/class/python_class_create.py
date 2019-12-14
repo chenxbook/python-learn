@@ -37,10 +37,10 @@ class Person:
     def __init__(self, name):
         self.name = name
 
-    def sayHi(self):
+    def say_hi(self):
         print("Hello! My name is ", self.name)
 
 
 # 创建对象实例
 p = Person("张三")
-p.sayHi()
+p.say_hi()
