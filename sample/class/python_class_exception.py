@@ -7,11 +7,25 @@ import random
 # 1.Python中捕获与处理异常
 
 # 1.1 try-except语句中的使用
-
+# 单个异常处理
 try:
     fr = open("/not there", "r")
 except FileNotFoundError:
     print("This file is not exist！")
+
+# 多异常处理
+try:
+    f = open("123.txt")
+    line = f.read()
+    num = int(line)
+    print("read num = %d" % num)
+except IOError as e:
+    print("we catch IOError", e)
+except ValueError as e:
+    print("we catch ValueError", e)
+finally:
+    print("Close file")
+    f.close()
 
 # 1.2 try-except-else语句的使用
 a = 1
