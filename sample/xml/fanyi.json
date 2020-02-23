@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "k": "你好",
+            "v": "[nǐ hǎo] how do you do; how are you; hello;"
+        },
+        {
+            "k": "你好，陌生人",
+            "v": "网络 Hello Stranger; knowing me knowing you;"
+        },
+        {
+            "k": "你好吗",
+            "v": "How are you; How are you doing; How do you do;"
+        }
+    ],
+    "errno": 0
+}
