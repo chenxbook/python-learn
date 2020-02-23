@@ -1,6 +1,8 @@
 # 转载:[数据解析之BeautifulSoup4解析库](https://www.jianshu.com/p/e7d9e2031430)
 # coding:utf-8
 from bs4 import BeautifulSoup
+from bs4 import NavigableString
+import re
 
 html = """
 <html><head><title>The Dormouse's story</title></head>
@@ -119,3 +121,63 @@ print(soup.select('a[href="http://example.com/elsie"]'))
 # 7.2.6.获取内容: 用 get_text() 方法来获取
 for title in soup.select('title'):
     print(title.text)
+
+# 7.3 过滤器
+# 7.3.1 字符串
+print("=============================过滤器：字符串=====================================")
+# 查找文档中所有的<b>标签：
+print(soup.find_all('b'))
+# 7.3.2 正则表达式
+print("=============================过滤器：正则表达式==================================")
+# 找出所有以"b"开头的标签名称:
+for tag in soup.find_all(re.compile("^b")):
+    print(tag.name)
+# 7.3.3 列表
+print("====过滤器：列表=================================================================")
+# 找到文档中所有的<a>标签和<b>标签:
+print(soup.find_all(['a', 'b']))
+# 7.3.4 True
+print("===============================过滤器：True======================================")
+# 查找所有Tag,但是不会返回字符串节点
+for tag in soup.find_all(True):
+    print(tag.name)
+# 7.3.5 函数
+print("================================过滤器：函数======================================")
+
+# 定义函数，检验当前元素，如果包含class属性却不包含id属性，那么将返回True
+print("==函数1：检验当前元素，如果包含class属性却不包含id属性，那么将返回True=========")
+
+
+def has_class_but_no_id(tag):
+    return tag.has_attr('class') and not tag.has_attr('id')
+
+
+print(soup.find_all(has_class_but_no_id))
+
+# 找出href属性不符合指定正则表达式的<a>标签：
+print("==函数2：找出href属性不符合指定正则表达式的<a>标签============================")
+
+
+def not_lacie(href):
+    return href and not re.compile("lacie").search(href)
+
+
+print(soup.find_all(href=not_lacie))
+
+# 过滤出前、后都有文字的标签
+print("==函数3：过滤出前、后都有文字的标签============================")
+
+
+def surrouned_by_strings(tag):
+    return (isinstance(tag.next_element, NavigableString)
+            and isinstance(tag.previous_element, NavigableString))
+
+
+for tag in soup.find_all(surrouned_by_strings):
+    print(tag.name)
+
+print("==通过class_参数搜索有指定CSS类名的Tag============================")
+# 通过class_参数搜索有指定CSS类名的Tag
+print(soup.find_all(class_='sister', attrs={"id": "link1"}, href=re.compile('elsie$')))
+# 当搜索到结果数量达到limit的限制时就停止搜索返回结果
+print(soup.find_all("a", limit=2))
