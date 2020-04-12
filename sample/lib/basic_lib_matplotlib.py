@@ -13,7 +13,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 # fname 为你下载的字体库路径，注意 SimHei.ttf字体的路径
-zhfont1 = matplotlib.font_manager.FontProperties(fname="SimHei.ttf")
+zhfont1 = matplotlib.font_manager.FontProperties(fname="../font/SimHei.ttf")
 # 调整subplot周围的边距
 plt.subplots_adjust(wspace=5, hspace=10)
 plt.figure(figsize=[16.5, 12.5])
