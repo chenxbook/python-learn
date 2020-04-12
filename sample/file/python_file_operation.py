@@ -31,13 +31,16 @@ print(file2.read())
 print("判断文件是否已关闭:", file2.closed)
 # readlines()：读取整个文件的所有行，保存在一个列表(list)变量中，每行作为一个元素，但读取大文件会比较占内存。
 print("=========================================读取文件:readlines()===============================================")
-for lines in open("test_02.txt", "r").readlines():
-    print(lines, end='')
+f = open("test_02.txt", "r")
+try:
+    for lines in f.readlines():
+        print(lines, end='')
+finally:
+    f.close()
 print("\n=========================================Python写文件================================================")
 # 4.Python写文件
 file3 = open("test_03.txt", "a")
 file3.write("\n天津")
 seq = ["\n太原", "\n大同"]
 file3.writelines(seq)
-
 
