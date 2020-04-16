@@ -48,13 +48,31 @@ y1 = x + 3
 y2 = 3 - x
 
 # 绘制绿色，宽度为1个像素的实线
-plt.plot(x, y1, color="green", linewidth=1.0, linestyle="-")
+plt.plot(x, y1, color="green", linewidth=1.0, linestyle="-", label="y1")
 # 绘制红色，宽度为2个像素的虚线
-plt.plot(x, y2, color="red", linewidth=2.0, linestyle="--")
+plt.plot(x, y2, color="red", linewidth=2.0, linestyle="--", label="y2")
 # 设置横轴的上下限为-1~6
 plt.xlim(-1, 6)
 # 设置纵轴的上下限为-2~10
 plt.ylim(-2, 10)
+# 设置图例
+plt.legend(loc="upper left")
+# 注释特殊点位
+# scatter([x][y],s="点的大小")函数用于绘制散点图
+plt.scatter([3], [6], s=30, color="blue")
+plt.scatter([3], [0], s=30, color="red")
+# annotate("标注内容",xy=(要在哪个位置点标注内容))
+plt.annotate("(3,6)", xy=(3.3, 5.5), fontsize=16)
+plt.annotate("(3,0)", xy=(3.3, 0), fontsize=16)
+# 想给点添加注释，需要使用text(x,y,s)函数
+plt.text(4, -0.5, "该处为重要点位", fontdict={'size': 12, 'color': 'green'})
+# 保存图表
+# plt.savefig()函数：
+#  支持png/pdf/svg/ps等，以后缀名来指定
+#  dpi=分辨率,
+#  bbox_inches='tight'，尝试剪除图表周围的空白部分
+#  facecolor/edgecolor：
+plt.savefig("pic.png", dpi=100, bbox_inches='tight', facecolor="purple", edgecolor="blue")
 print("===================折线图2=========================")
 plt.show()
 
@@ -77,7 +95,7 @@ plt.xlabel("月份")
 plt.ylabel("温度（摄氏度）")
 # 添加标题
 plt.title("月均气温")
-# 添加纵横轴的刻度
+# 添加纵横轴的刻度(1st列表的值代表刻度，2nd列表的值代表所显示的标签)
 plt.xticks(index, ('一月', '二月', '三月', '四月', '五月', '六月'))
 # arange函数用于创建等差数组：np.arange([start, ]stop, [step, ]dtype=None)
 plt.yticks(np.arange(0, 50, 10))
@@ -91,7 +109,7 @@ labels = '大一', '大二', '大三', '大四'  # labels设置各个分片的�
 sizes = [15, 30, 45, 10]  # 数值列表
 # 将"大二"突出显示
 explode = (0, 0.1, 0, 0)  # explode指定饼图中突出的分片
-# autopct 设置标签中的数字格式; shadow设置是否有阴影；startangle设置从哪个角度开始绘制饼图
+# autopct设置标签中的数字格式; shadow设置是否有阴影；startangle设置从哪个角度开始绘制饼图
 plt.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
 plt.axis('equal')  # 确保饼图是个圆形
 plt.title('饼图示例')
